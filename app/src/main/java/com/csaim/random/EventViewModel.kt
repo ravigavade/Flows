@@ -12,25 +12,19 @@ import kotlinx.coroutines.launch
 class EventViewModel:ViewModel() {
 
 
-    //shared flow to emit one time events
+    //Event types
+    sealed class UiEvent{
+        data class ShowToast(val message: String): UiEvent()
+    }
+
+    //sharedFlow to emit one-time events
     private val _eventFlow = MutableSharedFlow<UiEvent>()
-    val eventFlow = _eventFlow.asSharedFlow()
+    val eventFLow = _eventFlow.asSharedFlow()
 
-
-    // trigger the event
     fun onButtonClicked(){
         viewModelScope.launch {
-            _eventFlow.emit(UiEvent.ShowToast("supp boi"))
+            _eventFlow.emit(UiEvent.ShowToast("this is a toast message"))
         }
     }
-
-
-
-
-    // event types
-    sealed class UiEvent {
-        data class ShowToast(val mesage : String) : UiEvent()
-    }
-
 
 }

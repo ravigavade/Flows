@@ -21,11 +21,12 @@ fun MainScreen(viewModel: EventViewModel = viewModel()) {
 
     //collect sharedFlow
     LaunchedEffect(Unit){
-        viewModel.eventFlow.collectLatest { event ->
+        viewModel.eventFLow.collectLatest { event ->
             when(event){
                 is EventViewModel.UiEvent.ShowToast -> {
-                    Toast.makeText(context, event.mesage, Toast.LENGTH_LONG)
+                    Toast.makeText(context, event.message, Toast.LENGTH_LONG).show()
                 }
+
             }
         }
     }
